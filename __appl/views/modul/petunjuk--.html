@@ -1,0 +1,92 @@
+<section class="course-details-area padding100 bg-gray">
+<div class="container">
+<div class="row" >
+	<div class="col-md-8 left-side-wrap">
+		<div class="single-course big-post">
+			<div class="course-content">
+				<h2 class="course-title"><a href="#">Rincian Profil</a></h2>
+				<div id="list_prop_{$acak}"></div>
+			</div>
+			<div class="rating">
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 right-side-wrap">
+		<div class="right-side-inner">
+			<aside class="widget wg-instructors">
+				<h3 class="sidebar-title">Profil Saya</h3>
+				<ul class="wg-instructors-menu">
+					<li class="single-instr">
+						<div class="instr-wrap fix">
+							<div class="instr-img">
+								<img src="{$host}__repository/foto/{$auth.foto_profil|default:'logo.gif'}" class="img-circle" alt="">
+							</div>
+							<div class="instr-info">
+								<a class="instr-name" href="#">{$auth.Nama|default:'-'}</a>
+								<p>Kelas {$auth.kelas|default:'-'}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</aside>
+			{if $auth.cl_user_group_id eq 3|default:'-'}
+			<aside class="widget wg-courses-detail">
+				<h3 class="sidebar-title">POIN</h3>
+				<ul class="wg-courses-detail-menu">
+					<li><h5>Total Poin <span>{$poin.poin.poin}</span></h5></li>
+					<li><h5>
+							<center>
+							<a href="javascript:void(0);" class="btn btn-primary" id="top_{$acak}">TopUp Poin</a>
+							<a href="javascript:void(0);" class="btn btn-warning" id="transfer_{$acak}">Transfer Poin</a>
+							</center>
+						</h5>
+					</li>
+				</ul>
+			</aside>
+			<aside class="widget wg-courses-detail">
+				<h3 class="sidebar-title">History Poin</h3>
+				<table class="table table-striped">
+					<thead>
+					<tr>
+						<th>Ket.</th>
+						<th>Terpakai</th>
+						<th>Sisa</th>
+					</tr>
+					</thead>
+					<tbody>
+					{foreach from=$poin.his item=i}
+					<tr>
+						<td>{$i.ket_his}</td>
+						<td align="right">{$i.poin_terpakai}</td>
+						<td align="right">{$i.sisa_poin}</td>
+					</tr>
+					{/foreach}
+					</tbody>
+				</table>
+			</aside>
+			{/if}
+		</div>
+	</div>
+</div>
+</div>
+</section>
+
+<script>
+	$('#list_prop_{$acak}').addClass('loading').html('');
+	{if $auth.cl_user_group_id eq 3|default:'-'}
+	$.post(host+'form/peserta',{ editstatus:'edit',id:{$auth.peserta_id|default:0},modul:'profile' },function(r){
+		$('#list_prop_{$acak}').removeClass('loading').html(r);
+	});
+	$('#top_{$acak}').bind('click',function(){
+		$.post(host+'form/topup',function(r){
+			windowForm(r,'Top Up Poin',500,200);
+		});
+		
+	});
+	{else}
+	$.post(host+'form/guru',{ editstatus:'edit',id:{$auth.id_identitas|default:0},modul:'profile' },function(r){
+		$('#list_prop_{$acak}').removeClass('loading').html(r);
+	});
+	{/if}
+	
+</script>

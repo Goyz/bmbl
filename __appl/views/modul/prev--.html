@@ -1,0 +1,128 @@
+<link rel="stylesheet" href="{$host}__assets/css/canvas.css">
+<script src="{$host}__assets/js/fastclick.js"></script>
+<script src="{$host}__assets/js/canvas.js"></script>
+<script src="{$host}__assets/js/canvas-video-player.js"></script>
+<fieldset>
+<legend>Step 3 Upload Cover Video </legend>
+{foreach from=$vid item=i}
+<div class="row" style="margin-bottom:15px;">
+	
+	<!--div style="padding-left:16px;" class="col-sm-5">
+		<div class="full-width-video-wrap embed-responsive embed-responsive-16by9">
+			<video id="vid_{$i.id}" class="video js-video" width="640" height="360" preload controls onclick="hitung_waktu()">
+				<source src="__repository/{if $modul eq 'materi' || $modul eq 'konten'}file_materi{else}bank_soal{/if}/{$i.create_by}/{$i.file_materi}#t=20" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+				<source src="__repository/{if $modul eq 'materi' || $modul eq 'konten'}file_materi{else}bank_soal{/if}/{$i.create_by}/{$i.file_materi}#t=20" type='video/ogg; codecs="theora, vorbis"' />
+				<source src="__repository/{if $modul eq 'materi' || $modul eq 'konten'}file_materi{else}bank_soal{/if}/{$i.create_by}/{$i.file_materi}#t=20" type='video/webm; codecs="vp8, vorbis"' />
+			</video>
+		</div>
+	</div-->
+	<!--div style="padding-left:16px;" class="col-sm-2">
+		<center>
+		<a href="javascript:void(0);" class="scren btn btn-small" data='{$i.id}'>Screnn Shottt</a>
+		</center>
+	</div-->
+	<div class="col-sm-4">
+	</div>
+	<div class="col-sm-4">
+		<div class="full-width-video-wrap embed-responsive embed-responsive-16by9">
+			<video id="vid_{$i.id}" class="video js-video" width="640" height="360" preload controls onclick="hitung_waktu()">
+				<source src="__repository/{if $modul eq 'materi' || $modul eq 'konten'}file_materi{else}bank_soal{/if}/{$i.create_by}/{$i.file_materi}#t=20" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+				<source src="__repository/{if $modul eq 'materi' || $modul eq 'konten'}file_materi{else}bank_soal{/if}/{$i.create_by}/{$i.file_materi}#t=20" type='video/ogg; codecs="theora, vorbis"' />
+				<source src="__repository/{if $modul eq 'materi' || $modul eq 'konten'}file_materi{else}bank_soal{/if}/{$i.create_by}/{$i.file_materi}#t=20" type='video/webm; codecs="vp8, vorbis"' />
+			</video>
+		</div>
+		<div class="video-timeline js-timeline" id="time_{$i.id}">
+			<div class="video-timeline-passed js-timeline-passed"></div>
+		</div>
+		<div id="canvas_wrap">
+			Xxxx
+			<canvas data='{$i.id}' class="canvas js-canvas canvas_{$acak}" id="can_{$i.id}">Sorry, no canvas available</canvas>
+		</div>
+		
+	</div>
+	<div class="col-sm-4">
+	</div>
+</div>
+{/foreach}
+</fieldset>
+{include file="template/button.html" text="Simpan Screnn Shot" id="simpan_screnn_{$acak}" icon="save"}
+
+<script>
+	var data={};
+	data['modul']='{$modul|default:"materi"}';
+	data['data']={};
+	data['data']["img"]={};
+	{foreach from=$vid item=i}
+	var canvasVideo{$i.id} = new CanvasVideoPlayer({
+		videoSelector: '#vid_{$i.id}',
+		canvasSelector: '#can_{$i.id}',
+		timelineSelector: '#time_{$i.id}',
+		framesPerSecond: 25,
+		hideVideo: true, // should script hide the video element
+		autoplay: false,
+		// IMPORTANT On iOS can't be used together with autoplay, autoplay will be disabled
+		audio: false, // can be true/false (it will use video file for audio), or selector for a separate audio file
+		resetOnLastFrame: true, // should video reset back to the first frame after it finishes playing
+			loop: false
+	});
+	//var c{$i.id} = $("#can_{$i.id}")[0];
+	//data['data']['img'][{$i.id}]=c{$i.id}.toDataURL();
+	
+	{/foreach}
+	
+	
+	/*$('.scren').linkbutton();
+	$('.scren').bind('click',function(){
+		var data_na=$(this).attr('data');
+		var v=$("#vid_"+data_na)[0];
+		var c = $("#can_"+data_na)[0];
+		var ctx = c.getContext("2d");
+		var cw = Math.floor(c.clientWidth - 200);
+		var ch = Math.floor(c.clientHeight - 120);
+
+		//v.play();
+		v.pause();
+		ctx.drawImage(v,0,0,cw,ch);	
+		ctx.font = "30px Arial";
+		ctx.fillText("This is a sample text",170,170);
+		//var dataURL = c.toDataURL();
+		data['data']['img'][data_na]=c.toDataURL();
+		
+		
+	});
+	*/
+	$('#simpan_screnn_{$acak}').bind('click',function(){
+		
+		$( ".canvas" ).each(function( index ) {
+		  console.log( index + ": " + $( this ).text() );
+		  var id_na=$( this ).attr('data');
+		  var c = $("#can_"+id_na)[0];
+		  data['data']['img'][id_na]=c.toDataURL();
+		});
+		console.log(data['data']);
+		/*if(Object.keys(data['data']['img']).length > 0){
+			$.post(host+'upload/cover',data,function(r){
+				console.log( r );
+				if(r==1){
+					{if $modul eq 'materi'}
+					$.messager.alert('Bimbel',"Data Seluruh Konten Materi Tersimpan",'info');
+					$('#grid_nya_konten').show();
+					$('#detil_nya_konten').hide();
+					{else}
+					$.messager.alert('Bimbel',"Data Seluruh Bank Soal Tersimpan",'info');
+					$('#grid_nya_{$modul}').show();
+					$('#detil_nya_{$modul}').hide();
+					{/if}
+					grid_nya.datagrid('reload');
+					
+				}else{
+					$.messager.alert('Bimbel',"Tidak Dapat Menyimpan Cover",'error');
+				}
+			});
+		}else{
+			$.messager.alert('Bimbel',"Silah Kan ScreenShot Video Anda",'error');
+		}*/
+		
+		
+	});
+</script>

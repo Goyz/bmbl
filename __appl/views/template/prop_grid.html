@@ -1,0 +1,32 @@
+<table id='prop_{$main}_{$acak}' width='100%'></table>
+
+<script>
+	var index_row;
+	$('#prop_{$main}_{$acak}').datagrid({
+		title:'Konfigurasi Data',
+		iconCls: 'icon-edit',
+		//width:width,
+		//height:height,
+        singleSelect: true,
+      //  toolbar: '#tb_'+id_grid,
+        url: host+'home/getdata/config',
+		nowrap: true,
+		autoRowHeight: false,
+		striped: true,
+        onClickCell: onClickCell,
+        //onEndEdit: onEndEdit,
+		columns:[[
+          { field:'konfig',title:'Kode',width:250 },
+          { field:'deskripsi',title:'Deskripsi',width:400,editor:'textbox' },
+          { field:'val',title:'Value/Nilai',width:150,editor:'textbox' }
+        ]],
+		onClickRow:function(rowIndex){
+			index_row=rowIndex;
+		},
+		toolbar: [{
+			iconCls: 'icon-save',
+			text:'Simpan Konfig',
+			handler: function(){ accept('prop_{$main}_{$acak}');send_grid_data('prop_{$main}_{$acak}'); }
+		}]
+	});
+</script>

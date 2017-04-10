@@ -1,0 +1,7 @@
+{if $mod eq 'voucher'}
+{include file="template/grid.html" main={$mod} button_2="true" table={$table}}
+{else if $mod eq 'konfig_poin'}
+{include file="template/prop_grid.html" main={$mod} button_2="true" table={$table}}
+{else}
+{include file="template/grid.html" main={$mod} button="true" table={$table}}
+{/if}

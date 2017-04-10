@@ -1,0 +1,53 @@
+<fieldset>
+	<legend>Masukan Kode Voucher</legend>
+	<form id="form_{$acak}" method="post" class="form-horizontal" url="{$host}isivoucher">
+	<center>
+	<input type="text" style="width:50px;height:32px;"  name="v_1" id="v_1_{$acak}" maxlength="4" class="validasi">&nbsp;-
+	<input type="text" style="width:50px;height:32px;"  name="v_2" id="v_2_{$acak}" maxlength="4" class="validasi">&nbsp;-
+	<input type="text" style="width:50px;height:32px;"  name="v_3" id="v_3_{$acak}" maxlength="4" class="validasi">&nbsp;-
+	<input type="text" style="width:50px;height:32px;"  name="v_4" id="v_4_{$acak}" maxlength="4" class="validasi">
+	<br>
+	<br>
+	<div id="load_{$acak}" style="display:none;"></div>
+	<a href="javascript:void(0);" class="btn btn-primary" id="top_up{$acak}" >Top Up</a>
+	</center>
+	</form>
+</fieldset>
+
+<script>
+	$(".validasi").validatebox( {  required:true } );
+	$('#top_up{$acak}').bind('click',function(){
+		$('#top_up{$acak}').hide();
+		$('#load_{$acak}').addClass('loading').show();
+		if ($('#form_{$acak}').form('validate')){
+			submit_form("form_{$acak}",function(x){
+				console.log(x);
+				var js=JSON.parse(x);
+				if(js.msg==0){
+					$.messager.alert('BIMBEL', 'Kode Voucher Salah', 'error');
+					$('#top_up{$acak}').show();
+					$('#load_{$acak}').removeClass('loading').hide();
+				}else if(js.msg==2){
+					$.messager.alert('BIMBEL', 'Kode Voucher Sudah Digunakan', 'error');
+					$('#top_up{$acak}').show();
+					$('#load_{$acak}').removeClass('loading').hide();
+				}else if(js.msg==3){
+					$.messager.alert('BIMBEL', 'Kode Voucher Gagal', 'error');
+					$('#top_up{$acak}').show();
+					$('#load_{$acak}').removeClass('loading').hide();
+				}else if(js.msg==1){
+					$.messager.alert('BIMBEL', 'Terima Kasih Anda Poin Anda Sudah Terkalkulasi', 'info');
+					$('#load_{$acak}').removeClass('loading').hide();
+					setTimeout(function(){ 
+						window.location.href='{$host}akun';
+					}, 1000);
+				}
+			});
+		}else{
+			$.messager.alert('BIMBEL', 'Isi Kode Voucher', 'error');
+			$('#load_{$acak}').removeClass('loading').hide();
+			$('#top_up{$acak}').show();
+		}
+	});
+	//$("#kode_voucher{$acak}").mask("X.99.999999",{ placeholder:" " });
+</script>

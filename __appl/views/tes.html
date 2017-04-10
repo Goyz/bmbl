@@ -1,0 +1,7 @@
+<div id="a" class="row"></div>
+
+<script>
+$.post(host+'preview',{ id_mat:2,mod:'konten' },function(r){
+		$('#a').removeClass('loading').html(r);
+});
+</script>

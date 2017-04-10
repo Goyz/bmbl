@@ -1,0 +1,45 @@
+
+<div style="width:100%;height:500px;" id="lay_{$acak}">
+	<div data-options="region:'west',split:true" title="{$matpel.nama_pelajaran|default:''} Kelas {$auth.kelas}" style="width:250px;">
+		<div id="tree_{$acak}"></div>
+	</div>
+	<div data-options="region:'center',title:'{if $mod|default:'' eq 'kelas'}Materi{else}Soal{/if} {$matpel.nama_pelajaran|default:''} Kelas {$auth.kelas}'">
+		<div id="isi_{$acak}" style="padding:20px;" class="isi_konten">
+			<div class="administrator-info">
+				<div class="administrator-avatar">
+					<img alt="administrator" class="img-circle" src="{$host}__repository/foto/{$auth.foto_profil|default:'logo.gif'}">	
+				</div>
+				<div class="administrator-description">
+					<h2><a href="#">Selamat Datang {$auth.Nama|default:'logo.gif'}</a></h2>
+					<p>Konten Mengenai Pelajaran {$matpel.nama_pelajaran|default:''}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    $('#lay_{$acak}').layout();
+	//$(function(){
+		var tree_na=$('#tree_{$acak}').tree({
+			url:host+'tree/{$modul}',
+			queryParams:{
+				pel:'{$id_pel|default:''}'
+				
+			//	modul:'{$modul}'
+			},
+			onClick: function(node){
+				if(node.flag=='sub_bab'){
+					{if $modul neq 'l_soal'}
+					pilih_tree('isi_{$acak}',node.id,'{$modul}',"{$id_pel|default:0}");
+					{else}
+					pilih_tree('isi_{$acak}',node.id,node.flag_mod,"{$id_pel|default:0}");
+					{/if}
+				}
+				//alert(node.flag);
+			}
+		});
+		
+		var pilih=tree_na.tree('getSelected');
+		
+	//});
+</script>

@@ -1,0 +1,72 @@
+<fieldset>
+	<legend>Form Generate Voucher</legend>
+	<form id="form_{$acak}" method="post" class="form-horizontal" url="{$host}generate">
+		<input type="hidden" name="id" id="id_{$acak}" value="{$data.id|default:''}">
+		<div class="form-group " style="">
+			<label for="inputEmail3" class="col-sm-3 control-label">Sistem Voucher</label>
+			<div class="col-sm-8">
+				<div class="radio">
+					<label>
+					  <input type="radio"  checked name="flag" class="p_sistem" value="P"> Sistem Poin
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+					  <input type="radio"  name="flag" class="p_sistem" value="B"> Sistem Bulanan
+					</label>
+				</div>
+			</div>
+		</div>
+		{include file="template/text.html" type="text" label="Nominal Poin Voucher" id_l_text="l_nominal" name="nominal" id="nominal" class="angka validasi" lebar="3" style="height:32px;"}
+		{include file="template/text.html" type="text" label="Jumlah Voucher" name="qty" id="qty" class="angka validasi" lebar="3" style="height:32px;"}
+	</form>
+	<fieldset><legend>Hasil Generate Voucher</legend>
+		<div id="hasil_{$acak}"></div>
+	</fieldset>
+	{include file="template/button.html" text="Generate Kode Voucher" id="simpan_{$acak}" icon="save"}
+	{include file="template/button.html" text="Kembali Ke Grid" id="cancel_{$acak}" icon="cancel"}
+</fieldset>
+
+<script>
+	$('.angka').numberbox({
+		 min:0,
+		 groupSeparator:','
+	});
+	$(".validasi").validatebox({ required:true }); 
+	$('#cancel_{$acak}').bind('click',function(){
+		$('#grid_nya_{$mod}').show();
+		$('#detil_nya_{$mod}').hide();
+		grid_nya.datagrid('reload');
+	});
+	$('.p_sistem').bind('click',function(){
+		console.log($(this).val());
+		if($(this).val()=='P'){ $('#l_nominal_{$acak}').html('Nominal Poin Voucher'); }
+		else{ $('#l_nominal_{$acak}').html('Nominal Bulanan(Hari)'); }
+	})
+	$('#simpan_{$acak}').bind('click',function(){
+		
+		if ($('#form_{$acak}').form('validate')){
+			$('#hasil_{$acak}').addClass('loading').html('');
+			submit_form('form_{$acak}',function(r){
+				//console.log(r);
+				var js=JSON.parse(r)
+				
+				console.log(js);
+				
+				if(js.msg==1){
+					$('#hasil_{$acak}').removeClass('loading').html(js.res);
+					$.messager.alert('Bimbel',"Voucher Telah TerGenerate",'info');
+					//$('#cancel_{$acak}').trigger('click');
+					//grid_nya.datagrid('reload');
+				}else{
+					console.log(r);
+					$.messager.alert('Bimbel',"Tdak Dapat Generate Data",'error');
+				}
+				
+			});
+		}else{
+			$.messager.alert('Bimbel',"Isi Data Yang Kosong",'info');
+		}
+		
+	});
+</script>

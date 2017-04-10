@@ -1,0 +1,176 @@
+<header id="header" class="solid-bg-header clear">
+				<div class="header-v1">
+					<!-- End Header Top -->
+					<!-- Start Header Bottom -->
+					<div class="header-bottom">
+						<div class="container">
+							<div class="row hidden-sm hidden-xs">
+								<!-- Start Logo -->
+								<div class="col-md-3">
+									<div class="header-logo">
+										<!--a href="index.html"><img src="img/logo/1.png" alt="main logo" /></a-->
+									</div>
+								</div>
+								<!-- End Logo -->
+								<!-- Start Main Menu -->
+                                <div class="col-md-9">
+                                    <div class="menu-wrap pull-right">
+                                        <nav class="primary-menu">
+										    <ul>
+										             
+										       
+												{if $auth.nama_user|default:''}
+													
+													{if $auth.cl_user_group_id|default:'' eq 1 or $auth.cl_user_group_id|default:'' eq 2}
+														<li class="current"><a href="javascript:void(0);">Referensi Materi<span class="indicator"><i class="fa fa-angle-down"></i></span></a>
+															<ul class="estut-dropdown">
+																{if $auth.cl_user_group_id|default:'' eq 1}
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/mata_pelajaran/cl_mata_pelajaran')" id="" >Data Mata Pelajaran</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/bab/tbl_bab_pelajaran')" id="" >Data BAB Pelajaran</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/sub_bab/tbl_sub_bab_pelajaran')" id="" >Data SUB BAB Pelajaran</a></li>													
+																{/if}
+															{*	<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/materi/tbl_materi')" id="" >Data Materi Pelajaran</a></li>*}													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/konten/tbl_konten_materi')" id="" >Data Konten Pelajaran</a></li>	
+															</ul>
+														</li>
+														<li class="current"><a href="javascript:void(0);">Referensi Bank Soal/Ujian<span class="indicator"><i class="fa fa-angle-down"></i></span></a>
+															<ul class="estut-dropdown">
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/un/tbl_bank_soal')" id="" >Bank Soal UN</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/smbptn/tbl_bank_soal')" id="" >Bank Soal SMBPTN</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/latihan/tbl_bank_soal')" id="" >Bank Soal Latihan</a></li>													
+																<li><a href="javascript:void(0);" onclick="" id="" >Data Ujian</a></li>		
+															</ul>
+														</li>
+														{if $auth.cl_user_group_id|default:'' eq 1}
+														<li class="current"><a href="javascript:void(0);">Referensi Master<span class="indicator"><i class="fa fa-angle-down"></i></span></a>
+															<ul class="estut-dropdown">
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/kelas/cl_kelas')" id="" >Data Kelas</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/peserta/cl_peserta')" id="" >Data Peserta</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/guru/cl_guru')" id="" >Data Guru</a></li>
+																
+															</ul>
+														</li>
+														<li class="current"><a href="javascript:void(0);">Konfigurasi<span class="indicator"><i class="fa fa-angle-down"></i></span></a>
+															<ul class="estut-dropdown">
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/konfig_poin/tbl_config')" id="" >Konfigurasi Poin</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/voucher/tbl_voucher')" id="" >Generate Voucher</a></li>											
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}broadcast')" id="" >Broadcast Email</a></li>											
+															</ul>
+														</li>
+														{/if}		
+													{else}
+													<li><a href="{$host}">HOME </a></li>                                                                               
+													<li><a href="about-us.html">PETUNJUK </a></li> 
+													
+													<li><a href="{$host}kelas">MATERI</a></li>   	
+													<li><a href="javascript:void(0);">BANK SOAL <span class="indicator"><i class="fa fa-angle-down"></i></span></a>
+														<ul class="estut-dropdown">
+															<li><a href="{$host}banksoal/un">UN (Ujian Nasional)</a></li>													
+															<li><a href="{$host}banksoal/smbptn">SBMPTN</a></li>		
+															<li><a href="{$host}banksoal/soal">Soal Latihan</a></li>		
+														</ul>
+													</li>
+
+													
+													{/if}
+													<li><a href="{$host}akun">PROFILE</a></li>   
+													<li><a href="{$host}keluar">KELUAR</a></li>   
+												{else}
+												<li><a href="{$host}">HOME </a></li>                                                                               
+										        <li><a href="{$host}petunjuk">PETUNJUK </a></li>  
+												<li><a href="{$host}kontak">KONTAK KAMI</a></li>     
+												<li><a href="{$host}registrasi">DAFTAR</a></li>      
+										        <li><a href="{$host}login">MASUK</a></li>
+												{/if}
+										        
+										    </ul>
+										</nav>
+                                    </div>
+                                </div>
+                                <!-- End Main Menu -->
+							</div>
+							<div class="row">
+								<div class="col-sm-3 hidden-md hidden-lg">
+									<div class="mobile-logo">
+										<!--a href="index.html"><img src="img/logo/1.png" alt="main logo" /></a-->
+									</div>
+								</div>
+								<div class="col-sm-9 hidden-md hidden-lg">
+									<!-- Main Menu End -->
+									<div class='mobile-menu-area'>
+										<nav id="mobile-menu">
+											<ul>
+												
+												{if $auth.nama_user|default:''}
+													{if $auth.cl_user_group_id|default:'' eq 1 or $auth.cl_user_group_id|default:'' eq 2}
+														<li ><a href="javascript:void(0);">Referensi Materi</a>
+															<ul >
+																{if $auth.cl_user_group_id|default:'' eq 1}
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/mata_pelajaran/cl_mata_pelajaran')" id="" >Data Mata Pelajaran</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/bab/tbl_bab_pelajaran')" id="" >Data BAB Pelajaran</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/sub_bab/tbl_sub_bab_pelajaran')" id="" >Data SUB BAB Pelajaran</a></li>													
+																{*<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/materi/tbl_materi')" id="" >Data Materi Pelajaran</a></li>*}		
+																{/if}
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/konten/tbl_konten_materi')" id="" >Data Konten Pelajaran</a></li>	
+															</ul>
+														</li>
+														<li ><a href="javascript:void(0);">Referensi Bank Soal/Ujian</a>
+															<ul >
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/un/tbl_bank_soal')" id="" >Bank Soal UN</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/smbptn/tbl_bank_soal')" id="" >Bank Soal SMBPTN</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/latihan/tbl_bank_soal')" id="" >Bank Soal Latihan</a></li>													
+																<li><a href="javascript:void(0);" onclick="" id="" >Data Ujian</a></li>		
+															</ul>
+														</li>
+														{if $auth.cl_user_group_id|default:'' eq 1}
+														<li ><a href="javascript:void(0);">Referensi Master</a>
+															<ul >
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/kelas/cl_kelas')" id="" >Data Kelas</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/peserta/cl_peserta')" id="" >Data Peserta</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/guru/cl_guru')" id="" >Data Guru</a></li>
+																
+															</ul>
+														</li>
+														<li ><a href="javascript:void(0);">Konfigurasi</a>
+															<ul >
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/konfig_poin/tbl_config')" id="" >Konfigurasi Poin</a></li>													
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}grid/voucher/tbl_voucher')" id="" >Generate Voucher</a></li>											
+																<li><a href="javascript:void(0);" onclick="loadUrl(this,'{$host}broadcast')" id="" >Broadcast Email</a></li>											
+															</ul>
+														</li>
+														{/if}
+													{else}
+													<li><a href="{$host}">HOME </a></li>                                                                               
+													<li><a href="about-us.html">PETUNJUK </a></li>
+													
+														<li><a href="{$host}kelas">MATERI</a></li>   	
+													
+														<li ><a href="javascript:void(0);">BANK SOAL</a>
+															<ul >
+																<li><a href="{$host}banksoal/un">UN (Ujian Nasional)</a></li>													
+																<li><a href="{$host}banksoal/smbptn">SBMPTN</a></li>		
+																<li><a href="{$host}banksoal/soal">Soal Latihan</a></li>		
+															</ul>
+														</li>
+													
+													{/if}
+													<li><a href="{$host}akun">AKUN</a></li>   
+													<li><a href="{$host}keluar">KELUAR</a></li>  
+												{else}			
+												<li><a href="{$host}">HOME </a></li>                                                                               
+										        <li><a href="{$host}petunjuk">PETUNJUK </a></li>   
+										        <li><a href="{$host}kontak">KONTAK KAMI</a></li>   
+												<li><a href="{$host}registrasi">DAFTAR</a></li>      
+										        <li><a href="{$host}login">MASUK</a></li>
+												{/if}   
+											</ul>
+										</nav>
+									</div>
+									<!-- Main Menu End -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Header Bottom -->
+				</div>
+			</header>

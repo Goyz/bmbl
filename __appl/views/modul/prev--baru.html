@@ -1,0 +1,61 @@
+<fieldset>
+<legend>Step 3 Upload Cover Video </legend>
+{foreach from=$vid item=i}
+<div class="row" style="margin-bottom:10px;">
+	<div style="padding-left:16px;" class="col-sm-5">
+		<div class="full-width-video-wrap embed-responsive embed-responsive-16by9">
+			<video id="video" width="320" controls="true">
+				<source src="{$host}__repository/{if $modul eq 'materi' || $modul eq 'konten'}file_materi{else}bank_soal{/if}/{$i.create_by}/{$i.file_materi}#t=20"  />
+				<source src="{$host}__repository/{if $modul eq 'materi' || $modul eq 'konten'}file_materi{else}bank_soal{/if}/{$i.create_by}/{$i.file_materi}#t=20"  />
+				<source src="{$host}__repository/{if $modul eq 'materi' || $modul eq 'konten'}file_materi{else}bank_soal{/if}/{$i.create_by}/{$i.file_materi}#t=20"  />
+				Your browser does not support HTML5 video tag. Please download FireFox 3.5 or higher.
+			</video>
+		</div>
+	</div>
+	<div style="padding-left:16px;" class="col-sm-2">
+		<center>
+		<a href="javascript:void(0);" class="scren btn btn-small" onclick="shoot()" data='{$i.id}'>Screnn Shottt</a>
+		</center>
+	</div>
+	<div style="padding-left:16px;" class="col-sm-5">
+		<div id="output" style="display: inline-block; top: 4px; position: relative ;border: dotted 1px #ccc; padding: 2px;"></div>
+	</div>
+</div>
+{/foreach}
+</fieldset>
+<script>
+var videoId = 'video';
+var scaleFactor = 0.25;
+var snapshots = [];
+
+function capture(video, scaleFactor) {
+    if(scaleFactor == null){
+        scaleFactor = 1;
+    }
+    var w = video.videoWidth * scaleFactor;
+    var h = video.videoHeight * scaleFactor;
+    var canvas = document.createElement('canvas');
+        canvas.width  = w;
+        canvas.height = h;
+    var ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, w, h);
+		//canvas.toDataURL("image/jpeg", 0.1);
+		console.log(canvas.toDataURL("image/jpeg", 0.1));
+    return canvas;
+} 
+ 
+
+function shoot(){
+    var video  = document.getElementById(videoId);
+    var output = document.getElementById('output');
+    var canvas = capture(video, scaleFactor);
+        canvas.onclick = function(){
+            window.open(this.toDataURL("image/jpeg", 1.0));
+        };
+    snapshots.unshift(canvas);
+    output.innerHTML = '';
+    for(var i=0; i<4; i++){
+        output.appendChild(snapshots[i]);
+    }
+}
+</script>

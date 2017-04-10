@@ -1,0 +1,61 @@
+{literal}
+<style type="text/css">
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+</style>
+{/literal}
+
+<div style="float:left;width:45%;">
+<table width="100%" style="font-family:helvetica,arial,verdana,sans; font-size:12px;">
+	<tr>
+		<td>Generate Date </td>
+		<td>:</td>
+		<td>{$data.header.create_date|default:'-'}</td>
+	</tr>
+	<tr>
+		<td>Jumlah Yang DiBuat</td>
+		<td>:</td>
+		<td>{$data.header.qty|default:'-'}</td>
+	</tr>
+</table>
+</div>
+
+<br>
+<br>
+<div style="float:left;width:100%;margin-top:20px;">
+	<table class="gridtable">
+		<tr style="border:1px solid black;">
+		  <th style="border-bottom:1px solid black;" width="5%">No.</th>
+		  <th style="border-bottom:1px solid black;" width="60%">Kode Voucher</th>
+		  <th style="border-bottom:1px solid black;" width="35%">{if $data.header.flag eq 'P'}Nominal Poin{else}Nominal Hari{/if}</th>
+		</tr>
+		{assign var=no_na value=0} 
+		{foreach from=$data.detil item=i}
+		<tr>
+			<td  align="center">{assign var=no_na value=$no_na+1}{$no_na}</td>
+			<td align="left">{$i.kode_voucher|default:'-'}</td>
+			<td align="center">{$data.header.nominal|default:'-'}</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>

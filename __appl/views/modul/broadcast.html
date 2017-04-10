@@ -1,0 +1,63 @@
+<div  id="form_mat_{$acak}">
+<fieldset>
+	<legend>Form Broadcast</legend>
+	<form id="form_mata_pelajaran_{$acak}" method="post" class="form-horizontal" url="{$host}simpan/tbl_broadcast/{$sts|default:'add'}">
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-3 control-label">Isi Broadcast</label>
+			<div class="col-sm-8">
+			{include file="template/editor.html" id="isi_broadcast_{$acak}" name="isi_broadcast" value="{$data.isi_broadcast|default:''}" class="validasi"} 
+			</div>
+		</div>
+		<div class="form-group">
+		<label for="inputEmail3" class="col-sm-3 control-label">Penerima Broadcast</label>
+		<div class="col-sm-8">
+			<fieldset><legend>Siswa / Peserta <span style="float:right;"><input type="checkbox" id="p_siswa_{$acak}" checked></span></legend>
+				{foreach from=$email.siswa item=i}
+				<div class="col-sm-4">
+					<div class="checkbox">
+						<label>
+						  <input type="checkbox" checked name="email_siswa[]" class="e_siswa" value="{$i.Email|default:'-'}"> {$i.Email|default:'-'}
+						</label>
+					</div>
+				</div>
+				{/foreach}
+			</fieldset>
+			<fieldset><legend>Guru / Pengajar <span style="float:right;"><input type="checkbox" id="p_guru_{$acak}" checked></span></legend>
+				{foreach from=$email.guru item=i}
+				<div class="col-sm-4">
+					<div class="checkbox">
+						<label>
+						  <input type="checkbox" checked name="email_guru[]" class="e_guru" value="{$i.email|default:'-'}"> {$i.email|default:'-'}
+						</label>
+					</div>
+				</div>
+				{/foreach}
+			</fieldset>
+		</div>
+		</div>
+		{include file="template/button.html" text="Kirim Broadcast" id="simpan_{$acak}" icon="save"}
+	</form>
+</fieldset>
+</div>
+<script>
+	gen_editor('#isi_broadcast_{$acak}');
+	$('#p_siswa_{$acak}').bind('click',function(){
+		if($(this).is(':checked')){ $('.e_siswa').each(function(){ this.checked = true; }); }
+		else{ $('.e_siswa').each(function(){ this.checked = false; }); }
+	})
+	$('#p_guru_{$acak}').bind('click',function(){
+		if($(this).is(':checked')){ $('.e_guru').each(function(){ this.checked = true; }); }
+		else{ $('.e_guru').each(function(){ this.checked = false; }); }
+	});
+	$('#simpan_{$acak}').bind('click',function(){
+		tinyMCE.get("isi_broadcast_{$acak}").save();
+		submit_form('form_mata_pelajaran_{$acak}',function(r){
+			if(r==1){
+				$.messager.alert('Bimbel',"Broadcast Telah Dikirimkan",'error');
+			}else{
+				console.log(r);
+				$.messager.alert('Bimbel',"Broadcast Gagal",'error');
+			}
+		});
+	});
+</script>

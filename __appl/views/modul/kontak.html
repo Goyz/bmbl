@@ -1,0 +1,112 @@
+<div class="contact-map">
+					<div id="googleMap" style="width:100%;height:500px;"></div>
+</div>
+				<!--End Google Map area -->
+				<!-- Start Contact Us area -->
+				<div class="contact-us-area padding100 bg-white-2">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="area-headding text-center">
+									<h2 class="section-title">Contact Us</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius consequat magna, <br>id molestie ipsum volutpat quis. Suspendisse consectetur fringilla suctus.</p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="contact-info-list text-center clear">
+									<div class="contact-info-inner clear">
+										<!-- Start Single info -->
+										<div class="single-info location bg-white text-center">
+											<div class="info-icon">
+												<!--img src="img/icon/map-marker.png" alt=""-->
+											</div>
+											<div class="info-dis">
+												<h3 class="con-in-title">Lokasi</h3>
+												<address>
+													<p>
+														Jl.Kalibata tengah no.35B Kalibata - Pancoran Jakarta Selatan<br>
+														DKI Jakarta, 12740
+													</p>
+												</address>
+											</div>
+										</div>
+										<!-- End Single info -->
+										<!-- Start Single info -->
+										<div class="single-info phone-no bg-white  text-center">
+											<div class="info-icon">
+												<!--img src="img/icon/phone.png" alt=""-->
+											</div>
+											<div class="info-dis">
+												<h3 class="con-in-title">Nomor Telp.</h3>
+												<p><a href="tel:+8801973833508">(021)8781993</a></p>
+												<p><a href="tel:+8801916137024">(021)4232344</a></p>
+											</div>
+										</div>
+										<!-- End Single info -->
+										<!-- Start Single info -->
+										<div class="single-info email bg-white  text-center">
+											<div class="info-icon">
+												<!--mg src="img/icon/email.png" alt=""-->
+											</div>
+											<div class="info-dis">
+												<h3 class="con-in-title">Email</h3>
+												<p><a href="mailto:admin@hastech.company">admin@bimbelonlineguruahli.com</a></p>
+												<p><a href="mailto:bestcareerbd@gmail.com">cs@bimbelonlineguruahli.com</a></p>
+											</div>
+										</div>
+										<!-- End Single info -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="contact-form-area">
+									<div class="form-wrap">
+										<form action="#">
+											<div class="form-inner">
+												<div class="single-input one-half left">
+													<label>Your Name <span>*</span></label> 
+													<input type="text" name="name" required="required">
+												</div>
+												<div class="single-input one-half right">
+													<label>Email Address <span>*</span></label> 
+													<input type="text" name="email" required="required">
+												</div>
+												<div class="single-input">
+													<label>Subject <span>*</span></label> 
+													<input name="subject" type="text" required="required">
+												</div>
+												<div class="single-input">
+													<label>Comment <span>*</span></label> 
+													<textarea name="message" class="textarea"></textarea>
+												</div>
+												<div class="submit-btn-area text-center">
+													<input type="submit" class="estut-btn active submit" value="submit">
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+ 
+ <script>
+	function initialize() { 
+		var mapOptions = { 
+			zoom: 15,
+			scrollwheel:false,
+			center: new google.maps.LatLng(-6.2541081,106.814779,15) 
+		};
+		var map = new google.maps.Map(document.getElementById('googleMap'),mapOptions);
+		var marker = new google.maps.Marker({ 
+			position: map.getCenter(),
+			animation:google.maps.Animation.BOUNCE,
+			icon: 'img/others/marker.png',map: map 
+		}); 
+	}google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
